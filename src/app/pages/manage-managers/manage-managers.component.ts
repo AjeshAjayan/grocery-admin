@@ -17,7 +17,8 @@ export class ManageManagersComponent implements OnInit {
     district: '',
     country: '',
     postal: '',
-    state: ''
+    state: '',
+    contctno1: ''
   };
 
   constructor() { }
