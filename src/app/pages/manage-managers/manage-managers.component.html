@@ -5,14 +5,14 @@
                 <div class=" card-header">
                     <h5 class=" title">Manager Managers</h5>
                 </div>
-                <div class=" card-body">
-                    <form (ngSubmit)="onSubmit()" #form="ngForm" autocomplete="off">
+                <form (ngSubmit)="onSubmit()" #form="ngForm" autocomplete="off">
+                    <div class=" card-body">
                         <div class="row">
                             <div class=" col-md-6 pr-md-1">
                                 <div class="form-group">
                                     <div>
                                         <label for="firstname"> First Name </label>
-                                        <div [hidden]="firstname.valid || firstname.pristine" class="text-danger">
+                                        <div [hidden]="firstname.valid || !firstname.touched" class="text-danger">
                                             First Name is required
                                         </div>
                                     </div>
@@ -24,7 +24,7 @@
                             <div class=" col-md-6 pl-md-1">
                                 <div class=" form-group">
                                     <label> Last Name </label>
-                                    <div [hidden]="lastname.valid || lastname.pristine" class="text-danger">
+                                    <div [hidden]="lastname.valid || !lastname.touched" class="text-danger">
                                         Last Name is required
                                     </div>
                                     <input id="lastname" name="lastname" #lastname="ngModel" required
@@ -37,7 +37,7 @@
                             <div class="col-md-4 pr-md-1">
                                 <div class="form-group">
                                     <label> Username </label>
-                                    <div [hidden]="username.valid || username.pristine" class="text-danger">
+                                    <div [hidden]="username.valid || !username.touched" class="text-danger">
                                         Username is required
                                     </div>
                                     <input id="username" name="username" #username="ngModel" required
@@ -48,7 +48,7 @@
                             <div class="col-md-4 pr-md-1 pl-md-1">
                                 <div class="form-group">
                                     <label> Password </label>
-                                    <div [hidden]="password.valid || password.pristine" class="text-danger">
+                                    <div [hidden]="password.valid || !password.touched" class="text-danger">
                                         Password is required
                                     </div>
                                     <input id="password" #password="ngModel" name="password" #password="ngModel"
@@ -59,7 +59,7 @@
                             <div class=" col-md-4 pl-md-1">
                                 <div class=" form-group">
                                     <label for="exampleInputEmail1"> Email address </label>
-                                    <div [hidden]="email.valid || email.pristine" class="text-danger">
+                                    <div [hidden]="email.valid || !email.touched" class="text-danger">
                                         Email is required
                                     </div>
                                     <input id="email" required name="email" #email="ngModel" [(ngModel)]="manager.email"
@@ -71,7 +71,7 @@
                             <div class=" col-md-12">
                                 <div class=" form-group">
                                     <label> Manager's Personal Address / Shop Address </label>
-                                    <div [hidden]="address.valid || address.pristine" class="text-danger">
+                                    <div [hidden]="address.valid || !address.touched" class="text-danger">
                                         Address is required
                                     </div>
                                     <input id="address" name="address" #address="ngModel" required
@@ -84,7 +84,7 @@
                             <div class=" col-md-4 pr-md-1">
                                 <div class=" form-group">
                                     <label> District </label>
-                                    <div [hidden]="district.valid || district.pristine" class="text-danger">
+                                    <div [hidden]="district.valid || !district.touched" class="text-danger">
                                         District is required
                                     </div>
                                     <input id="district" name="district" #district="ngModel" required
@@ -95,7 +95,7 @@
                             <div class=" col-md-4 px-md-1">
                                 <div class="form-group">
                                     <label> State </label>
-                                    <div [hidden]="state.valid || state.pristine" class="text-danger">
+                                    <div [hidden]="state.valid || !state.touched" class="text-danger">
                                         State is required
                                     </div>
                                     <input #state="ngModel" [(ngModel)]="manager.state" required id="state" name="state"
@@ -105,7 +105,7 @@
                             <div class=" col-md-4 pl-md-1">
                                 <div class=" form-group">
                                     <label> Postal Code </label>
-                                    <div [hidden]="postal.valid || postal.pristine" class="text-danger">
+                                    <div [hidden]="postal.valid || !postal.touched" class="text-danger">
                                         Postal Code is required
                                     </div>
                                     <input #postal="ngModel" [(ngModel)]="manager.postal" required id="postal"
@@ -117,7 +117,7 @@
                             <div class=" col-md-4 pr-md-1">
                                 <div class=" form-group">
                                     <label> Country </label>
-                                    <div [hidden]="country.valid || country.pristine" class="text-danger">
+                                    <div [hidden]="country.valid || !country.touched" class="text-danger">
                                         Country is required
                                     </div>
                                     <input #country="ngModel" [(ngModel)]="manager.country" required id="country"
@@ -128,11 +128,12 @@
                             <div class=" col-md-4 px-md-1">
                                 <div class=" form-group">
                                     <label> Contact Number 1 </label>
-                                    <div [hidden]="contctno1.valid || contctno1.pristine" class="text-danger"> 
-                                        Contact Number 1 is required 
+                                    <div [hidden]="contctno1.valid || !contctno1.touched" class="text-danger">
+                                        Contact Number 1 is required
                                     </div>
-                                    <input id="contctno1" #contctno1="ngModel" name="contctno1" required [(ngModel)]="manager.contctno1"
-                                        class="form-control" placeholder="Contact Number 1" type="text" />
+                                    <input id="contctno1" #contctno1="ngModel" name="contctno1" required
+                                        [(ngModel)]="manager.contctno1" class="form-control"
+                                        placeholder="Contact Number 1" type="text" />
                                 </div>
                             </div>
                             <div class=" col-md-4 pl-md-1">
@@ -142,11 +143,11 @@
                                 </div>
                             </div>
                         </div>
-                    </form>
-                </div>
-                <div class=" card-footer">
-                    <button class=" btn btn-fill btn-danger" type="submit">Save</button>
-                </div>
+                    </div>
+                    <div class=" card-footer">
+                        <button class=" btn btn-fill btn-danger" type="submit">Save</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

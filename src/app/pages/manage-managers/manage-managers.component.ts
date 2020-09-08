@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-manage-managers',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./manage-managers.component.scss']
 })
 export class ManageManagersComponent implements OnInit {
+
+  @ViewChild('form') form: NgForm; 
 
   manager = {
     firstname: '',
@@ -29,7 +32,12 @@ export class ManageManagersComponent implements OnInit {
   }
 
   onSubmit() {
-    // TODO: save
+    if(this.form.valid) {
+      // TODO: save
+    }
+    else {
+      // TODO: show errors
+    }
   }
 
 }
