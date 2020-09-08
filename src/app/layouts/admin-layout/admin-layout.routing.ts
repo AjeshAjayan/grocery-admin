@@ -14,7 +14,7 @@ export const AdminLayoutRoutes: Routes = [
   { path: "dashboard", component: DashboardComponent },
   { path: "shops", component: ShopsComponent },
   { path: "managers", component: ManagesComponent },
-  { path: "manage-manager", component: ManageManagersComponent },
+  { path: "manage-manager/:id", component: ManageManagersComponent },
   { path: "add-location", component: AddLocationComponent },
   { path: "add-catagory", component: AddCatagoryComponent },
   { path: "set-margin", component: SetMarginComponent },
