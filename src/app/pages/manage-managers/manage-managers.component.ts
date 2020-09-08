@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
+import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
   selector: 'app-manage-managers',
@@ -24,7 +26,7 @@ export class ManageManagersComponent implements OnInit {
     contctno1: ''
   };
 
-  constructor() { }
+  constructor(private notificationService: NotificationService) { }
 
   ngOnInit(): void {
     // TODO : check if save or edit
@@ -34,9 +36,11 @@ export class ManageManagersComponent implements OnInit {
   onSubmit() {
     if(this.form.valid) {
       // TODO: save
+      const toster = this.notificationService.notify('Saving...', '', 'info');
+      // toster.toastRef.close();
     }
     else {
-      // TODO: show errors
+      this.notificationService.notify('Please fill all mandatory fields', '', 'warning', 5000);
     }
   }
 

@@ -22,9 +22,11 @@ import { ComplaintsComponent } from './pages/complaints/complaints.component';
 import { ShopsComponent } from './pages/shops/shops.component';
 import { ManagesComponent } from './pages/manages/manages.component';
 import { ManageManagersComponent } from './pages/manage-managers/manage-managers.component';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   imports: [
+    CommonModule,
     BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
@@ -34,7 +36,12 @@ import { ManageManagersComponent } from './pages/manage-managers/manage-managers
     AppRoutingModule,
     AngularFireModule,
     AngularFirestoreModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot({
+      autoDismiss: false,
+      disableTimeOut: true,
+      positionClass: 'toast-top-center',
+      preventDuplicates: true,
+    })
   ],
   declarations: [
     AppComponent,
