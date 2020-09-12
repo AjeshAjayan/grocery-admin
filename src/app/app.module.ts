@@ -34,7 +34,7 @@ import { CommonModule } from '@angular/common';
     NgbModule,
     RouterModule,
     AppRoutingModule,
-    AngularFireModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
     ToastrModule.forRoot({
       autoDismiss: false,

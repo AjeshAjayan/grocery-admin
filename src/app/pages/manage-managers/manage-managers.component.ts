@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
+import { Manager } from 'src/app/models/manager';
+import { MangerService } from 'src/app/services/manger.service';
 import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
@@ -12,7 +14,7 @@ export class ManageManagersComponent implements OnInit {
 
   @ViewChild('form') form: NgForm; 
 
-  manager = {
+  manager: Manager = {
     firstname: '',
     lastname: '',
     username: '',
@@ -23,10 +25,17 @@ export class ManageManagersComponent implements OnInit {
     country: '',
     postal: '',
     state: '',
-    contctno1: ''
+    contctno1: '',
+    contctno2: '',
+    isDeleted: false,
+    createdDate: Date.now()
   };
 
-  constructor(private notificationService: NotificationService) { }
+  constructor(
+    private notificationService: NotificationService,
+    private mangerService: MangerService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
     // TODO : check if save or edit
@@ -35,9 +44,15 @@ export class ManageManagersComponent implements OnInit {
 
   onSubmit() {
     if(this.form.valid) {
-      // TODO: save
       const toster = this.notificationService.notify('Saving...', '', 'info');
-      // toster.toastRef.close();
+      this.mangerService.addManager(this.manager).then(() => {
+        toster.toastRef.close();
+        this.notificationService.notify('Success', 'Saved', 'success', 3000);
+        this.router.navigate(['/managers'])
+      })
+      .catch(() => {
+        this.notificationService.notify('Oops something went wrong', 'Error', 'error', 3000);
+      })
     }
     else {
       this.notificationService.notify('Please fill all mandatory fields', '', 'warning', 5000);

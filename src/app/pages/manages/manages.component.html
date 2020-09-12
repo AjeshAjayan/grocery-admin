@@ -19,20 +19,22 @@
                     <th>SI No</th>
                     <th>Manager</th>
                     <th>Location</th>
+                    <th>Contact No</th>
                     <th class=" text-center">Edit</th>
                     <th class=" text-center">Delete</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>Dakota Rice</td>
-                    <td>Niger</td>
-                    <td>Oud-Turnhout</td>
+                  <tr *ngFor="let manager of managers; let i = index">
+                    <td> {{ i + 1 }} </td>
+                    <td> {{manager.firstname}} {{manager.lastname}} </td>
+                    <td> {{manager.country | uppercase}}, {{manager.state}}, {{manager.district}} </td>
+                    <td> {{manager.contctno1}}, {{manager.contctno2}} </td>
                     <td class=" text-center">
-                        <button [routerLink]="['/manage-manager', 1]" class="btn btn-success">Edit</button>
+                        <button [routerLink]="['/manage-manager', manager.id]" class="btn btn-success">Edit</button>
                     </td>
                     <td class=" text-center">
-                        <button [routerLink]="['/manage-manager', 1]" class="btn btn-danger">Delete</button>
+                        <button [routerLink]="['/manage-manager', manager.id]" class="btn btn-danger">Delete</button>
                     </td>
                   </tr>
                 </tbody>
