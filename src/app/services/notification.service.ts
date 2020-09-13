@@ -27,7 +27,45 @@ export class NotificationService {
   }
 
   loader(title: string, content: string) {
-    const toster = this.toastrService.success(content, title);
+    const toster = this.toastrService.info(content, title);
     return toster;
+  }
+
+  quickLoaderFetch() {
+    const toster = this.toastrService.info('', 'Fetching...');
+    return toster;
+  }
+  quickError(time: number) {
+    const toster = this.toastrService.error('Oops something went wrong', 'Error');
+      setTimeout(() => {
+        toster.toastRef.close();
+      }, time)
+  }
+
+  quickLoaderSaveing() {
+    const toster = this.toastrService.info('', 'Saving...');
+    return toster;
+  }
+
+  quickLoaderDeleting() {
+    const toster = this.toastrService.info('', 'Deleting...');
+    return toster;
+  }
+
+  quickLoaderUpdating() {
+    const toster = this.toastrService.info('', 'Updating...');
+    return toster;
+  }
+
+  quickSaved() {
+    this.notify('Success', 'Saved', 'success', 3000);
+  }
+
+  quickDeleted() {
+    this.notify('Success', 'Deleted', 'success', 3000);
+  }
+
+  quickUpdated() {
+    this.notify('Success', 'Updated', 'success', 3000);
   }
 }

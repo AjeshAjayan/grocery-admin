@@ -13,7 +13,23 @@ export class MangerService {
     return this.firestore.collection('managers').add(manger);
   }
 
-  getAllManagers() {
-    return this.firestore.collection('managers').snapshotChanges();
+  getAllManagers = () => this.firestore.collection(
+    'managers',
+    ref => ref.where("isDeleted", "==", false)
+  ).snapshotChanges();
+
+  getByID = (id: string) => {
+    return this.firestore.collection('managers')
+      .doc(id)
+      .snapshotChanges();
   }
+
+  update = (manager: Manager) => this.firestore.collection('managers')
+    .doc(manager.id)
+    .set(manager, { merge: true });
+
+  delete = (id: string) => this.firestore.collection('managers')
+    .doc(id)
+    .delete(); 
+
 }

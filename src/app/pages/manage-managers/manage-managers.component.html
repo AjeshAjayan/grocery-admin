@@ -145,7 +145,8 @@
                         </div>
                     </div>
                     <div class=" card-footer">
-                        <button class=" btn btn-fill btn-danger" type="submit">Save</button>
+                        <button *ngIf="!isUpdate" class=" btn btn-fill btn-danger" type="submit">Save</button>
+                        <button *ngIf="isUpdate" class=" btn btn-fill btn-danger" type="submit">Update</button>
                     </div>
                 </form>
             </div>

@@ -1,6 +1,7 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { Manager } from 'src/app/models/manager';
 import { MangerService } from 'src/app/services/manger.service';
 import { NotificationService } from 'src/app/services/notification.service';
@@ -10,9 +11,13 @@ import { NotificationService } from 'src/app/services/notification.service';
   templateUrl: './manage-managers.component.html',
   styleUrls: ['./manage-managers.component.scss']
 })
-export class ManageManagersComponent implements OnInit {
+export class ManageManagersComponent implements OnInit, OnDestroy {
 
-  @ViewChild('form') form: NgForm; 
+  @ViewChild('form') form: NgForm;
+
+  subscriptions: Subscription[] = [];
+
+  isUpdate = false;
 
   manager: Manager = {
     firstname: '',
@@ -34,29 +39,66 @@ export class ManageManagersComponent implements OnInit {
   constructor(
     private notificationService: NotificationService,
     private mangerService: MangerService,
-    private router: Router
+    private router: Router,
+    private activatedRoute: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
-    // TODO : check if save or edit
-    // TODO : if edit get managed by id and load details in form
+    // check if save or edit
+    this.subscriptions.push(
+      this.activatedRoute.paramMap.subscribe(param => {
+        this.manager.id = param.get('id');
+      })
+    );
+    this.isUpdate = (this.manager.id === '0') ? false : true;
+
+    // if edit get managed by id and load details in form
+    if (this.isUpdate) {
+      const toster = this.notificationService.quickLoaderFetch();
+      this.mangerService.getByID(this.manager.id)
+        .subscribe(response => {
+          this.manager = { ...response.payload.data() as Manager, id: response.payload.id };
+          toster.toastRef.close();
+        }, error => {
+          toster.toastRef.close();
+          this.notificationService.quickError(3000);
+          console.error(error);
+        });
+    }
   }
 
   onSubmit() {
-    if(this.form.valid) {
-      const toster = this.notificationService.notify('Saving...', '', 'info');
-      this.mangerService.addManager(this.manager).then(() => {
-        toster.toastRef.close();
-        this.notificationService.notify('Success', 'Saved', 'success', 3000);
-        this.router.navigate(['/managers'])
-      })
-      .catch(() => {
-        this.notificationService.notify('Oops something went wrong', 'Error', 'error', 3000);
-      })
+    if (this.form.valid) {
+      if (this.isUpdate) {
+        const toster = this.notificationService.quickLoaderUpdating();
+        this.mangerService.update(this.manager).then(() => {
+          toster.toastRef.close();
+          this.notificationService.quickUpdated();
+          this.router.navigate(['/managers']);
+        }).catch(error => {
+          toster.toastRef.close();
+          this.notificationService.quickError(3000);
+          console.error(error);
+        })
+      }
+      else {
+        const toster = this.notificationService.notify('Saving...', '', 'info');
+        this.mangerService.addManager(this.manager).then(() => {
+          toster.toastRef.close();
+          this.notificationService.notify('Success', 'Saved', 'success', 3000);
+          this.router.navigate(['/managers'])
+        })
+          .catch(() => {
+            this.notificationService.notify('Oops something went wrong', 'Error', 'error', 3000);
+          })
+      }
     }
     else {
       this.notificationService.notify('Please fill all mandatory fields', '', 'warning', 5000);
     }
   }
 
+  ngOnDestroy() {
+    this.subscriptions.forEach(s => s.unsubscribe());
+  }
 }

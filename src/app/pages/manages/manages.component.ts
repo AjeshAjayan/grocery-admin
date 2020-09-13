@@ -26,12 +26,22 @@ export class ManagesComponent implements OnInit, OnDestroy {
         this.managers = response.map((res) => {
           return { ...res.payload.doc.data() as Manager, id: res.payload.doc.id };
         })
-      },
-      (error) => {
+      }, error => {
         this.notificationService.notify('Oops something went wrong', 'Error', 'error', 3000);
         console.error(error);
       })
     );
+  }
+
+  deleteManager(id: string) {
+    const toster = this.notificationService.quickLoaderDeleting();
+    this.mangerService.delete(id).then(() => {
+      toster.toastRef.close();
+      this.notificationService.quickDeleted();
+    }).catch(error => {
+      console.error(error);
+      this.notificationService.quickError(3000);
+    })
   }
 
   ngOnDestroy() {
