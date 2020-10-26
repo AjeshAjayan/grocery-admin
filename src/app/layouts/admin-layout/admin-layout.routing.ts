@@ -9,8 +9,10 @@ import { ComplaintsComponent } from 'src/app/pages/complaints/complaints.compone
 import { ShopsComponent } from 'src/app/pages/shops/shops.component';
 import { ManagesComponent } from 'src/app/pages/manages/manages.component';
 import { ManageManagersComponent } from 'src/app/pages/manage-managers/manage-managers.component';
+import { LoginComponent } from 'src/app/pages/login/login.component';
 
 export const AdminLayoutRoutes: Routes = [
+  { path: "", component: LoginComponent },
   { path: "dashboard", component: DashboardComponent },
   { path: "shops", component: ShopsComponent },
   { path: "managers", component: ManagesComponent },
