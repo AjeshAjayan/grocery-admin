@@ -12,8 +12,7 @@ import { ManageManagersComponent } from 'src/app/pages/manage-managers/manage-ma
 import { LoginComponent } from 'src/app/pages/login/login.component';
 
 export const AdminLayoutRoutes: Routes = [
-  { path: "", component: LoginComponent },
-  { path: "dashboard", component: DashboardComponent },
+  { path: "", component: DashboardComponent },
   { path: "shops", component: ShopsComponent },
   { path: "managers", component: ManagesComponent },
   { path: "manage-manager/:id", component: ManageManagersComponent },
@@ -22,4 +21,5 @@ export const AdminLayoutRoutes: Routes = [
   { path: "set-margin", component: SetMarginComponent },
   { path: "delivery-slots", component: DeliverySlotsComponent },
   { path: "complaints", component: ComplaintsComponent },
+  { path: "login", component: LoginComponent },
 ];
