@@ -61,7 +61,7 @@
   "homepage": "https://demos.creative-tim.com/black-dashboard-angular/#/dashboard",
   "private": false,
   "dependencies": {
-    "@angular/animations": "^9.0.5",
+    "@angular/animations": "^9.1.12",
     "@angular/common": "9.0.5",
     "@angular/compiler": "9.0.5",
     "@angular/core": "9.0.5",
@@ -77,14 +77,14 @@
     "firebase": "^7.24.0",
     "firebaseui": "^4.7.0",
     "firebaseui-angular": "^5.0.1",
-    "ngx-toastr": "^10.0.4",
+    "ngx-toastr": "^10.2.0",
     "rxjs": "6.5.2",
     "tslib": "1.10.0",
     "zone.js": "0.10.2"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "0.900.5",
-    "@angular/cli": "^9.0.5",
+    "@angular/cli": "^9.1.12",
     "@angular/compiler-cli": "9.0.5",
     "@angular/language-service": "9.0.5",
     "@types/jasmine": "3.5.8",
