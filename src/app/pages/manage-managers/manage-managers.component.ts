@@ -82,15 +82,7 @@ export class ManageManagersComponent implements OnInit, OnDestroy {
         })
       }
       else {
-        const toster = this.notificationService.notify('Saving...', '', 'info');
-        this.mangerService.addManager(this.manager).then(() => {
-          toster.toastRef.close();
-          this.notificationService.notify('Success', 'Saved', 'success', 3000);
-          this.router.navigate(['/managers'])
-        })
-          .catch(() => {
-            this.notificationService.notify('Oops something went wrong', 'Error', 'error', 3000);
-          })
+        this.mangerService.addManager(this.manager);
       }
     }
     else {

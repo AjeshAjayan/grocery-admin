@@ -23,6 +23,7 @@ import { ShopsComponent } from './pages/shops/shops.component';
 import { ManagesComponent } from './pages/manages/manages.component';
 import { ManageManagersComponent } from './pages/manage-managers/manage-managers.component';
 import { CommonModule } from '@angular/common';
+import { AngularFireAuthModule } from '@angular/fire/auth';
 
 @NgModule({
   imports: [
@@ -36,6 +37,7 @@ import { CommonModule } from '@angular/common';
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
+    AngularFireAuthModule,
     ToastrModule.forRoot({
       autoDismiss: false,
       disableTimeOut: true,

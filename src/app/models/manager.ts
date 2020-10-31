@@ -13,5 +13,6 @@ export interface Manager {
     contctno1: string;
     contctno2: string;
     isDeleted: boolean;
-    createdDate: number
+    createdDate: number;
+    uid?: string;
 }

@@ -1,16 +1,44 @@
 import { Injectable } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { Router } from '@angular/router';
 import { AngularFirestore } from 'angularfire2/firestore';
+import { of } from 'rxjs';
 import { Manager } from '../models/manager';
+import { NotificationService } from './notification.service';
+import Axios from 'axios';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MangerService {
 
-  constructor(private firestore: AngularFirestore) { }
+  constructor(
+    private firestore: AngularFirestore,
+    private angularFireAuth: AngularFireAuth,
+    private notificationService: NotificationService,
+    private router: Router
+  ) { }
 
   addManager(manger: Manager) {
-    return this.firestore.collection('managers').add(manger);
+    const toster = this.notificationService.notify('Saving...', '', 'info');
+
+    // create user
+    this.angularFireAuth.auth.createUserWithEmailAndPassword(manger.email, manger.password)
+      .then(response => {
+        manger.uid = response.user.uid;
+        toster.toastRef.close();
+        this.notificationService.notify('Success', 'Saved', 'success', 3000);
+        this.router.navigate(['/managers'])
+        return this.firestore.collection('managers').add(manger);
+      })
+      .catch(error => {
+        toster.toastRef.close();
+        this.notificationService.notify(error.message, '', 'error', 3000);
+        return of(null);
+      });
+
+    // send mail to manager
   }
 
   getAllManagers = () => this.firestore.collection(
@@ -24,12 +52,24 @@ export class MangerService {
       .snapshotChanges();
   }
 
-  update = (manager: Manager) => this.firestore.collection('managers')
-    .doc(manager.id)
-    .set(manager, { merge: true });
+  update(manager: Manager) {
+    // send mail to manager
+    return this.firestore.collection('managers')
+      .doc(manager.id)
+      .set(manager, { merge: true });
+  }
 
   delete = (id: string) => this.firestore.collection('managers')
     .doc(id)
-    .delete(); 
+    .delete();
 
+  deleteUserFromAuth = async (uid: string) => {
+    try {
+      await Axios.post(environment.baseUrlCloudFn + 'deleteUser', { uid })
+    } catch (e) {
+      console.log(e);
+      
+      this.notificationService.quickError(3000);
+    }
+  }
 }

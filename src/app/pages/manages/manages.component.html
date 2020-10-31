@@ -34,7 +34,7 @@
                         <button [routerLink]="['/manage-manager', manager.id]" class="btn btn-success">Edit</button>
                     </td>
                     <td class=" text-center">
-                        <button (click)="deleteManager(manager.id)" class="btn btn-danger">Delete</button>
+                        <button (click)="deleteManager(manager.id, manager.uid)" class="btn btn-danger">Delete</button>
                     </td>
                   </tr>
                 </tbody>
