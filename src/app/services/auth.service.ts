@@ -9,8 +9,12 @@ export class AuthService {
 
   constructor(private angularFireAuth: AngularFireAuth,) { }
 
-  async authState() {
-    return await this.angularFireAuth.authState;
+  authState() {
+    this.angularFireAuth.authState.subscribe(response => {
+      
+    }, error => {
+
+    });
   }
 
   async signIn() {
