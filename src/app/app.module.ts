@@ -24,6 +24,8 @@ import { ManagesComponent } from './pages/manages/manages.component';
 import { ManageManagersComponent } from './pages/manage-managers/manage-managers.component';
 import { CommonModule } from '@angular/common';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { PincodeDialogComponent } from './pages/add-location/pincode-dialog/pincode-dialog.component';
+import { MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
 
 @NgModule({
   imports: [
@@ -38,6 +40,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
     AngularFireAuthModule,
+    MatDialogModule,
     ToastrModule.forRoot({
       autoDismiss: false,
       disableTimeOut: true,
@@ -55,9 +58,12 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
     ComplaintsComponent,
     ShopsComponent,
     ManagesComponent,
-    ManageManagersComponent
+    ManageManagersComponent,
+    PincodeDialogComponent
   ],
-  providers: [],
+  providers: [
+    {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

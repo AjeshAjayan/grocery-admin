@@ -19,7 +19,14 @@ export class AuthService {
 
   async signIn() {
     const provider = new auth.GoogleAuthProvider();
-    const credentials = await this.angularFireAuth.auth.signInWithPopup(provider);
-    console.log(credentials.user);
+    try {
+      const credentials = await this.angularFireAuth.auth.signInWithPopup(provider);
+      console.log(credentials.user);
+    } catch(e) {
+      console.log(e);
+      if(e.code === "auth/popup-blocked") {
+        alert('Disable Pop-up and try again');
+      }
+    }
   }
 }
