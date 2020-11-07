@@ -7,6 +7,7 @@ import { Manager } from '../models/manager';
 import { NotificationService } from './notification.service';
 import Axios from 'axios';
 import { environment } from 'src/environments/environment';
+import { Pincode } from '../models/pincode';
 
 @Injectable({
   providedIn: 'root'
@@ -20,17 +21,25 @@ export class MangerService {
     private router: Router
   ) { }
 
-  addManager(manger: Manager) {
+  addManager(manger: Manager, pincodes: Pincode[]) {
     const toster = this.notificationService.notify('Saving...', '', 'info');
 
     // create user
     this.angularFireAuth.auth.createUserWithEmailAndPassword(manger.email, manger.password)
       .then(response => {
         manger.uid = response.user.uid;
-        toster.toastRef.close();
-        this.notificationService.notify('Success', 'Saved', 'success', 3000);
-        this.router.navigate(['/managers'])
-        return this.firestore.collection('managers').add(manger);
+        manger.assignedPincodes = pincodes;
+
+        // add manager ang pincode to firebase
+        this.firestore.collection('managers').add(manger).then(response => {
+          toster.toastRef.close();
+          this.notificationService.notify('Success', 'Saved', 'success', 3000);
+          this.router.navigate(['/managers'])
+        }).catch(error => {
+          toster.toastRef.close();
+          this.notificationService.notify(error.message, '', 'error', 3000);
+          return of(null);  
+        });
       })
       .catch(error => {
         toster.toastRef.close();
@@ -68,7 +77,7 @@ export class MangerService {
       await Axios.post(environment.baseUrlCloudFn + 'deleteUser', { uid })
     } catch (e) {
       console.log(e);
-      
+
       this.notificationService.quickError(3000);
     }
   }

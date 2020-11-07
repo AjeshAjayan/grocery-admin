@@ -143,6 +143,25 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row">
+                            <div [hidden]="pins.valid || !pins.touched" class="text-danger">
+                                Pincodes are required
+                            </div>
+                            <mat-form-field class="col-md-12" appearance="outline">
+                                <mat-label>Assign pincodes to managers</mat-label>
+                                <mat-select [compareWith]="customCompare" multiple [(ngModel)]="selectedPincodes" name="pincodes" #pins="ngModel"
+                                    required>
+                                    <mat-option>
+                                        <ngx-mat-select-search name="pincideSearch" placeholderLabel="Search..." ngModel
+                                            (ngModelChange)="filterPincodes($event)"
+                                            noEntriesFoundLabel="no matching entries found"></ngx-mat-select-search>
+                                    </mat-option>
+                                    <mat-option [value]="pin" *ngFor="let pin of pincodes">
+                                        {{pin.pincode}} - {{pin.place}} - {{pin.district}} - {{pin.state}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
                     </div>
                     <div class=" card-footer">
                         <button *ngIf="!isUpdate" class=" btn btn-fill btn-danger" type="submit">Save</button>

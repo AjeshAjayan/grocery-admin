@@ -1,3 +1,5 @@
+import { Pincode } from './pincode';
+
 export interface Manager {
     id?: string;
     firstname: string;
@@ -15,4 +17,5 @@ export interface Manager {
     isDeleted: boolean;
     createdDate: number;
     uid?: string;
+    assignedPincodes: Pincode[];
 }

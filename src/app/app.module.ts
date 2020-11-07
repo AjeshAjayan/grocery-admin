@@ -26,6 +26,8 @@ import { CommonModule } from '@angular/common';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { PincodeDialogComponent } from './pages/add-location/pincode-dialog/pincode-dialog.component';
 import { MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
+import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   imports: [
@@ -41,6 +43,8 @@ import { MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/d
     AngularFirestoreModule,
     AngularFireAuthModule,
     MatDialogModule,
+    NgxMatSelectSearchModule,
+    MatSelectModule,
     ToastrModule.forRoot({
       autoDismiss: false,
       disableTimeOut: true,
