@@ -17,7 +17,6 @@ import { ComponentsModule } from "./components/components.module";
 import { AddLocationComponent } from './pages/add-location/add-location.component';
 import { AddCatagoryComponent } from './pages/add-catagory/add-catagory.component';
 import { SetMarginComponent } from './pages/set-margin/set-margin.component';
-import { DeliverySlotsComponent } from './pages/delivery-slots/delivery-slots.component';
 import { ComplaintsComponent } from './pages/complaints/complaints.component';
 import { ShopsComponent } from './pages/shops/shops.component';
 import { ManagesComponent } from './pages/manages/manages.component';
@@ -28,6 +27,7 @@ import { PincodeDialogComponent } from './pages/add-location/pincode-dialog/pinc
 import { MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import { MatSelectModule } from '@angular/material/select';
+import { PlansComponent } from './pages/plans/plans.component';
 
 @NgModule({
   imports: [
@@ -58,12 +58,12 @@ import { MatSelectModule } from '@angular/material/select';
     AddLocationComponent,
     AddCatagoryComponent,
     SetMarginComponent,
-    DeliverySlotsComponent,
     ComplaintsComponent,
     ShopsComponent,
     ManagesComponent,
     ManageManagersComponent,
-    PincodeDialogComponent
+    PincodeDialogComponent,
+    PlansComponent
   ],
   providers: [
     {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}}

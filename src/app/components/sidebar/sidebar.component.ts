@@ -43,15 +43,8 @@ export const ROUTES: RouteInfo[] = [
     class: ""
   },
   {
-    path: "/set-margin",
-    title: "Set Margin",
-    rtlTitle: "ملف تعريفي للمستخدم",
-    icon: "icon-coins",
-    class: ""
-  },
-  {
-    path: "/delivery-slots",
-    title: "Delivery Slots",
+    path: "/plans",
+    title: "create Plans",
     rtlTitle: "قائمة الجدول",
     icon: "icon-delivery-fast",
     class: ""
