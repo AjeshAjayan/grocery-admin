@@ -14,7 +14,7 @@ export const environment = {
     appId: "1:867577720090:web:727ab6d014d166ee85d0a3",
     measurementId: "G-0SKZ2EGBS4"
   },
-  baseUrlCloudFn: 'https://us-central1-grocery-app-6863f.cloudfunctions.net/widgets/'
+  baseUrlCloudFn: 'http://localhost:5001/grocery-app-6863f/us-central1/widgets/'
 };
 
 /*

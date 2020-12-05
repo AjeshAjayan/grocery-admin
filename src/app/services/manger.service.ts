@@ -8,6 +8,7 @@ import { NotificationService } from './notification.service';
 import Axios from 'axios';
 import { environment } from 'src/environments/environment';
 import { Pincode } from '../models/pincode';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,8 @@ export class MangerService {
     private firestore: AngularFirestore,
     private angularFireAuth: AngularFireAuth,
     private notificationService: NotificationService,
-    private router: Router
+    private router: Router,
+    private _http: HttpClient,
   ) { }
 
   addManager(manger: Manager, pincodes: Pincode[]) {
@@ -30,16 +32,23 @@ export class MangerService {
         manger.uid = response.user.uid;
         manger.assignedPincodes = pincodes;
 
-        // add manager ang pincode to firebase
-        this.firestore.collection('managers').add(manger).then(response => {
-          toster.toastRef.close();
-          this.notificationService.notify('Success', 'Saved', 'success', 3000);
-          this.router.navigate(['/managers'])
-        }).catch(error => {
-          toster.toastRef.close();
-          this.notificationService.notify(error.message, '', 'error', 3000);
-          return of(null);  
-        });
+        this._http.post(environment.baseUrlCloudFn + 'send-mail', {
+          newUserPassword: manger.password,
+          toMail: manger.email
+        }).subscribe(
+          () => {
+            // add manager ang pincode to firebase
+            this.firestore.collection('managers').add(manger).then(response => {
+              toster.toastRef.close();
+              this.notificationService.notify('Success', 'Saved', 'success', 3000);
+              this.router.navigate(['/managers'])
+            }).catch(error => {
+              toster.toastRef.close();
+              this.notificationService.notify(error.message, '', 'error', 3000);
+              return of(null);
+            });
+          }
+        )
       })
       .catch(error => {
         toster.toastRef.close();
