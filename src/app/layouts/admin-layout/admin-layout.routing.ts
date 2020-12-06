@@ -9,6 +9,7 @@ import { ShopsComponent } from 'src/app/pages/shops/shops.component';
 import { ManagesComponent } from 'src/app/pages/manages/manages.component';
 import { ManageManagersComponent } from 'src/app/pages/manage-managers/manage-managers.component';
 import { PlansComponent } from 'src/app/pages/plans/plans.component';
+import { PlanManageComponent } from 'src/app/pages/plans/plan-manage/plan-manage.component';
 
 export const AdminLayoutRoutes: Routes = [
   { path: "dashboard", component: DashboardComponent },
@@ -20,4 +21,5 @@ export const AdminLayoutRoutes: Routes = [
   { path: "set-margin", component: SetMarginComponent },
   { path: "complaints", component: ComplaintsComponent },
   { path: "plans", component: PlansComponent },
+  { path: "manage-plan/:id", component: PlanManageComponent },
 ];

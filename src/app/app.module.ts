@@ -28,6 +28,7 @@ import { MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/d
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import { MatSelectModule } from '@angular/material/select';
 import { PlansComponent } from './pages/plans/plans.component';
+import { PlanManageComponent } from './pages/plans/plan-manage/plan-manage.component';
 
 @NgModule({
   imports: [
@@ -63,7 +64,8 @@ import { PlansComponent } from './pages/plans/plans.component';
     ManagesComponent,
     ManageManagersComponent,
     PincodeDialogComponent,
-    PlansComponent
+    PlansComponent,
+    PlanManageComponent
   ],
   providers: [
     {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}}

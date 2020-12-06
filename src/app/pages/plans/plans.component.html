@@ -1,3 +1,54 @@
-<div class="content">
-    <p>plans works!</p>
-</div>
+
+<div class=" content">
+    <div class=" row">
+        <div class="col-md-12">
+            <button [routerLink]="['/manage-plan', 0]" class="btn btn-primary">Add New</button>
+        </div>
+    </div>
+    <div class=" row">
+      <div class=" col-md-12">
+        <div class=" card">
+          <div class=" card-header">
+            <h4 class=" card-title">Plans</h4>
+          </div>
+          <div class=" card-body">
+            <div class=" table-responsive">
+              <table class=" table tablesorter" id="">
+                <thead class=" text-primary">
+                  <tr>
+                    <th>SI No</th>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Duration</th>
+                    <th>Number of Products</th>
+                    <th>Images per Products</th>
+                    <th>Description</th>
+                    <th class=" text-center">Edit</th>
+                    <th class=" text-center">Delete</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let plan of plans; let i = index">
+                    <td> {{ i + 1 }} </td>
+                    <td> {{plan.name}} </td>
+                    <td> {{plan.price}} </td>
+                    <td> {{plan.plan_total_duration_in_days}} </td>
+                    <td> {{plan.no_of_product}} </td>
+                    <td> {{plan.no_of_images}} </td>
+                    <td> {{plan.description}} </td>
+                    <td class=" text-center">
+                        <button [routerLink]="['/manage-plan', plan.id]" class="btn btn-success">Edit</button>
+                    </td>
+                    <td class=" text-center">
+                        <button (click)="deletePlan(plan.id)" class="btn btn-danger">Delete</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

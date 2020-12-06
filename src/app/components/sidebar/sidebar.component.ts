@@ -44,7 +44,7 @@ export const ROUTES: RouteInfo[] = [
   },
   {
     path: "/plans",
-    title: "create Plans",
+    title: "Create Shop Plans",
     rtlTitle: "قائمة الجدول",
     icon: "icon-delivery-fast",
     class: ""

@@ -1,0 +1,115 @@
+<div class=" content">
+    <div class=" row">
+        <div class=" col-md-12">
+            <div class=" card">
+                <div class=" card-header">
+                    <h5 class=" title">Manager Plan</h5>
+                </div>
+                <form (ngSubmit)="onSubmit()" #form="ngForm" autocomplete="off">
+                    <div class=" card-body">
+                        <div class="row">
+                            <div class=" col-md-6 pr-md-1">
+                                <div class="form-group">
+                                    <div>
+                                        <label for="title"> Title </label>
+                                        <div [hidden]="title.valid || !title.touched" class="text-danger">
+                                            Title is required
+                                        </div>
+                                    </div>
+                                    <input id="title" [(ngModel)]="plan.name" #title="ngModel" required
+                                        name="firstname" class=" form-control" placeholder="Title of plan"
+                                        type="text" />
+                                </div>
+                            </div>
+                            <div class=" col-md-6 pl-md-1">
+                                <div class=" form-group">
+                                    <label> No of images </label>
+                                    <div [hidden]="no_of_images.valid || !no_of_images.touched" class="text-danger">
+                                        No of images is required
+                                    </div>
+                                    <input id="no_of_images" name="no_of_images" #no_of_images="ngModel" required
+                                        [(ngModel)]="plan.no_of_images" class=" form-control"
+                                        placeholder="No of images can be added" type="number" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 pr-md-1">
+                                <div class="form-group">
+                                    <label> No of Products </label>
+                                    <div [hidden]="no_of_product.valid || !no_of_product.touched" class="text-danger">
+                                        No of Products is required
+                                    </div>
+                                    <input id="no_of_product" name="no_of_product" #no_of_product="ngModel" required
+                                        [(ngModel)]="plan.no_of_product" class=" form-control" placeholder="No of Products can be added"
+                                        type="number" />
+                                </div>
+                            </div>
+                            <div class="col-md-4 pr-md-1 pl-md-1">
+                                <div class="form-group">
+                                    <label> Plan total duration in days </label>
+                                    <div [hidden]="plan_total_duration_in_days.valid || !plan_total_duration_in_days.touched" class="text-danger">
+                                        Plan total duration in days is required
+                                    </div>
+                                    <input id="plan_total_duration_in_days" name="plan_total_duration_in_days" #plan_total_duration_in_days="ngModel"
+                                        [(ngModel)]="plan.plan_total_duration_in_days" required class=" form-control"
+                                        placeholder="Plan total duration in days" type="number" />
+                                </div>
+                            </div>
+                            <div class=" col-md-4 pl-md-1">
+                                <div class=" form-group">
+                                    <label for="exampleInputEmail1"> Price </label>
+                                    <div [hidden]="price.valid || !price.touched" class="text-danger">
+                                        Price is required
+                                    </div>
+                                    <input id="price" required name="price" #price="ngModel" [(ngModel)]="plan.price"
+                                        class="form-control" placeholder="Price" type="number" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class=" row">
+                            <div class=" col-md-4 pr-md-1">
+                                <div class=" form-group">
+                                    <label> Product expiry in days </label>
+                                    <div [hidden]="product_expiry_in_days.valid || !product_expiry_in_days.touched" class="text-danger">
+                                        Product expiry in days is required
+                                    </div>
+                                    <input id="product_expiry_in_days" name="product_expiry_in_days" #product_expiry_in_days="ngModel" required
+                                        [(ngModel)]="plan.name" class="form-control" placeholder="Product expiry in days"
+                                        type="text" />
+                                </div>
+                            </div>
+                            <div class=" col-md-4 px-md-1">
+                                <div class="form-group">
+                                    <label> Reach radius in KM </label>
+                                    <div [hidden]="reach_radius_in_km.valid || !reach_radius_in_km.touched" class="text-danger">
+                                        Reach radius in KM is required
+                                    </div>
+                                    <input #reach_radius_in_km="ngModel" [(ngModel)]="plan.reach_radius_in_km" required id="reach_radius_in_km" name="reach_radius_in_km"
+                                        class="form-control" placeholder="State" type="text" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class=" row">
+                            <div class=" col-md-12">
+                                <div class=" form-group">
+                                    <label> Description </label>
+                                    <div [hidden]="description.valid || !description.touched" class="text-danger">
+                                        Description is required
+                                    </div>
+                                    <input id="description" name="description" #description="ngModel" required
+                                        [(ngModel)]="plan.description" class=" form-control"
+                                        placeholder="description" type="text" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class=" card-footer">
+                        <button *ngIf="!isUpdate" class=" btn btn-fill btn-danger" type="submit">Save</button>
+                        <button *ngIf="isUpdate" class=" btn btn-fill btn-danger" type="submit">Update</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
